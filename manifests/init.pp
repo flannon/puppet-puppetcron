@@ -2,25 +2,6 @@
 #
 # Full description of class puppetcron here.
 #
-# === Parameters
-#
-# Document parameters here.
-#
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-# === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
-#
 # === Examples
 #
 #  class { 'puppetcron':
@@ -29,13 +10,38 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Author Name flannon@nyu.edu
 #
 # === Copyright
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class puppetcron {
+class puppetcron (
+  $ensure = hiera('puppetcron::ensure',
+    $puppetcron::params::ensure),
+  $minute = hiera('puppetcron::minute',
+    $puppetcron::params::minute),
+  $revision = hiera('puppetcron::revision',
+    $puppetcron::params::revision),
+) inherits puppetcron::params {
 
+  # Install puppetcron script to manage puppet runs
+  file { '/usr/local/sbin/puppetcron.sh':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0744',
+    content => template('puppetcron/puppetcron.sh.erb'),
+    notify => Cron['puppet-cron'],
+    }
+
+  # Run puppet once every half hour
+  cron { 'puppet-cron' :
+    ensure  => $ensure,
+    commant => '/usr/local/sbin/puppetcron.sh',
+    user    => 'root',
+    minute  => "$minute-59/30",
+    require => File['/usr/local/sbin/puppetcron.sh'],
+  }
 
 }
