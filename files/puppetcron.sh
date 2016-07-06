@@ -4,6 +4,7 @@ BASEDIR='/Users/stan/Documents/dlib/repos/testy'
 MANIFEST="$BASEDIR/manifests/site.pp"
 MODULEDIR="$BASEDIR/modules/thirdparty"
 PUPPETFILE="$BASEDIR/Puppetfile"
+REMOTE='origin'
 REVISION='master'
 COUNT=0
 
@@ -28,6 +29,10 @@ do
 
 done
 
+# pull upstream
+#
+git pull $REMOTE $REVISION --no-edit
+
 if [[ ! -d $MODULEDIR ]]
 then
     mkdir -p $MODULEDIR
@@ -45,5 +50,6 @@ if [[ -f $MANIFEST ]]
 then
     puppet apply $MANIFEST
 else
+    echo "$MANIFEST file not found"
     exit 258
 fi
