@@ -8,30 +8,11 @@ REMOTE='origin'
 REVISION='<%= @revision %>'
 COUNT=0
 
+
+# Make sure the latest version of thepupet repo is installed
+/usr/bin/puppet apply /etc/puppet/manifests/puppetcron.pp
+
 cd $BASEDIR
-
-# Check the git branch to see if it's 'master', 
-# if not checkout master, then check the branch again
-while [[ $(git rev-parse --abbrev-ref HEAD) != $REVISION  ]]
-do
-    echo "COUNT: $COUNT"
-    echo $(git rev-parse --abbrev-ref HEAD)
-    if [[ $COUNT < 3 ]]
-    then
-        git checkout master
-        let "COUNT++"
-        echo "git rev-parse: $(git rev-parse --abbrev-ref HEAD)"
-    else
-        echo "COUNT: $COUNT"
-        echo "git rev-parse: $(git rev-parse --abbrev-ref HEAD)"
-        exit 256
-    fi
-
-done
-
-# pull upstream
-#
-git pull $REMOTE $REVISION --no-edit
 
 if [[ ! -d $MODULEDIR ]]
 then
