@@ -21,21 +21,21 @@ class puppetcron::repo (
     $puppetcron::params::ensure),
   $minute = hiera('puppetcron::minute',
     $puppetcron::params::minute),
-  $repo = hiera('puppetcron::repo',
-    $puppetcron::params::repo),
   $revision = hiera('puppetcron::revision',
     $puppetcron::params::revision),
+  $repo = hiera('puppetcron::source',
+    $puppetcron::params::source),
 ) inherits puppetcron::params {
 
-  # Make sure the puppet repo is installed and set to
-  # the proper branch.
+  # This makes sure that the the puppet repo is installed
+  # and up to date with the latest commit.
   vcsrepo { '/etc/puppet':
     ensure   => latest,
     owner    => 'root',
     group    => 'root',
     provider => git,
-    source   => $source,
     revision => $revision,
+    source   => $source,
     }
 
 }

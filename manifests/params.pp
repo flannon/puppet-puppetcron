@@ -20,7 +20,7 @@ class puppetcron::params {
 
   $ensure   = 'present'
   $minute   = '0'
-  $repo     = ''
   $revision = 'master'
+  $source   = ''
 
 }

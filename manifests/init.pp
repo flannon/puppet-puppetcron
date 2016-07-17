@@ -23,6 +23,8 @@ class puppetcron (
     $puppetcron::params::minute),
   $revision = hiera('puppetcron::revision',
     $puppetcron::params::revision),
+  $revision = hiera('puppetcron::source',
+    $puppetcron::params::source),
 ) inherits puppetcron::params {
 
   # Install puppetcron script to manage puppet runs
@@ -31,7 +33,7 @@ class puppetcron (
     owner   => 'root',
     group   => 'root',
     mode    => '0744',
-    content => template('puppetcron/puppetcron.sh.erb'),
+    source => 'puppet:///modules/puppetcron/puppetcron.sh'),
     notify => Cron['puppet-cron'],
     }
 
