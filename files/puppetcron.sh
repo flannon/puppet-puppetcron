@@ -4,13 +4,8 @@ BASEDIR='/etc/puppet'
 MANIFEST="$BASEDIR/manifests/site.pp"
 MODULEDIR="$BASEDIR/modules/thirdparty"
 PUPPETFILE="$BASEDIR/Puppetfile"
-REMOTE='origin'
-REVISION='<%= @revision %>'
 COUNT=0
 
-
-# Make sure the latest version of thepupet repo is installed
-/usr/bin/puppet apply /etc/puppet/manifests/puppetcron.pp
 
 cd $BASEDIR
 
@@ -21,15 +16,15 @@ fi
 
 if [[ -f $PUPPETFILE ]] 
 then
-    r10k puppetfile install --moduledir $MODULEDIR
+    r10k puppetfile install 
 else 
-    echo "$PUPPETFILE does not exist"
+    echo "$PUPPETFILE file not found    "
     exit 257
 fi
 
 if [[ -f $MANIFEST ]]
 then
-    puppet apply $MANIFEST
+    /usr/bin/puppet apply $MANIFEST
 else
     echo "$MANIFEST file not found"
     exit 258
