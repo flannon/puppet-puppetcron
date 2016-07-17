@@ -1,4 +1,5 @@
 #!/bin/bash
+rvm use 1.9.3-p551
 
 BASEDIR='/etc/puppet'
 MANIFEST="$BASEDIR/manifests/site.pp"
