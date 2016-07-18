@@ -33,14 +33,14 @@ class puppetcron (
     owner   => 'root',
     group   => 'root',
     mode    => '0744',
-    source => 'puppet:///modules/puppetcron/puppetcron.sh'),
+    source => 'puppet:///modules/puppetcron/puppetcron.sh',
     notify => Cron['puppet-cron'],
     }
 
   # Run puppet once every half hour
   cron { 'puppet-cron' :
     ensure  => $ensure,
-    command => '/usr/local/sbin/puppetcron.sh >> /var/log/puppet/puppetcron',
+    command => '/usr/local/sbin/puppetcron.sh >> /var/log/puppet/puppetcron.log 2>&1',
     user    => 'root',
     minute  => "$minute-59/30",
     require => File['/usr/local/sbin/puppetcron.sh'],
