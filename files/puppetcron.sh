@@ -6,12 +6,10 @@ export PATH="/usr/local/rvm/rubies/ruby-1.9.3-p551/bin:/usr/local/rvm/gems/ruby-
 export GEM_HOME=/usr/local/rvm/gems/ruby-1.9.3-p551
 export GEM_PATH=/usr/local/rvm/gems/ruby-1.9.3-p551:/usr/local/rvm/gems/ruby-1.9.3-p551@global
 
-#source /etc/profile.d/rvm.sh
+source /etc/profile.d/rvm.sh
 source /usr/local/rvm/environments/ruby-1.9.3-p551
 
 rvm use 1.9.3-p551
-
-source /usr/local/rvm/environments/ruby-1.9.3-p551
 
 BASEDIR='/etc/puppet'
 MANIFEST="$BASEDIR/manifests/site.pp"
