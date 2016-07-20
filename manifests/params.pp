@@ -16,6 +16,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
+#
 class puppetcron::params {
 
   $ensure   = 'present'

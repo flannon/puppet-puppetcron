@@ -1,6 +1,6 @@
 {
   "name": "puppet-puppetcron",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Flannon",
   "summary": "Maintenance utilities for Masterless puppet environment.",
   "license": "Apache 2.0",

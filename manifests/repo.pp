@@ -16,6 +16,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
+#
 class puppetcron::repo (
   $ensure = hiera('puppetcron::ensure',
     $puppetcron::params::ensure),
