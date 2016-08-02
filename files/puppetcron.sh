@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#export PATH="$PATH:/usr/local/rvm/bin"
+export $HOME='/root'
 export PATH="/usr/local/rvm/rubies/ruby-1.9.3-p551/bin:/usr/local/rvm/gems/ruby-1.9.3-p551/bin:/usr/local/rvm/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 export GEM_HOME=/usr/local/rvm/gems/ruby-1.9.3-p551
@@ -18,7 +18,7 @@ PUPPETFILE="$BASEDIR/Puppetfile"
 
 if [[ -f $MANIFEST ]]
 then
-    /usr/bin/puppet apply $MANIFEST
+    puppet apply $MANIFEST
 else
     echo "$MANIFEST file not found"
     exit 258
